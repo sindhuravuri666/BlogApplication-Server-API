@@ -21,6 +21,28 @@ app.get("/api/v1/Blog", async (req, res) => {
   }
 });
 
+app.post("/api/v1/Blog", async (req, res) => {
+  try {
+    const { title, content, author, category, likes, comments } = req.body;
+    const data = await blogModel.create({
+      title,
+      content,
+      author,
+      category,
+      likes,
+      comments,
+    });
+    res.status(201).json({
+      message: "Success",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      error: error,
+    });
+  }
+});
+
 app.listen(8080, () => {
   try {
     console.log("server is running on port 8080");
