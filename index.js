@@ -1,7 +1,7 @@
 import express from "express";
 import ConnectDB from "./ConnectDB.js";
 import blogModel from "./Models/BlogModel.js";
-import mongoose, { mongo } from "mongoose";
+import mongoose, { model, mongo } from "mongoose";
 const app = express();
 //middleware
 app.use(express.json());
@@ -40,6 +40,31 @@ app.post("/api/v1/Blog", async (req, res) => {
     res.status(500).json({
       error: error,
     });
+  }
+});
+
+app.get("/api/v1/Blog/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await blogModel.findById(id);
+
+    res.status(200).json({ data });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      error: error,
+    });
+  }
+});
+
+app.delete("/api/v1/Blog/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await blogModel.findByIdAndDelete(id);
+    res.status(200).json({ message: "Deletion Success" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error });
   }
 });
 
