@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const ConnectDB = async () => {
   try {
     const conn = await mongoose.connect(
-      "mongodb+srv://admin:admin@blogdata.z88nr.mongodb.net/?retryWrites=true&w=majority&appName=BlogData"
+      "mongodb+srv://admin:admin@blogdb.8vz6g.mongodb.net/"
     );
     console.log("connected to mongo");
   } catch (error) {
