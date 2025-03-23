@@ -2,9 +2,14 @@ import express from "express";
 import ConnectDB from "./ConnectDB.js";
 import blogModel from "./Models/BlogModel.js";
 import mongoose, { model, mongo } from "mongoose";
+//importing cors
+import cors from "cors";
+
 const app = express();
 //middleware
 app.use(express.json());
+
+app.use(cors());
 
 ConnectDB();
 
